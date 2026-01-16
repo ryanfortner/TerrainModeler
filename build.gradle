@@ -1,10 +1,15 @@
 plugins {
     id 'java'
+    id 'application'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'io.github.ryanfortner.TerrainModeler'
 version = '1.0'
+
+application {
+    mainClass = 'io.github.ryanfortner.TerrainModeler.Main'
+}
 
 repositories {
     mavenCentral()
@@ -16,6 +21,15 @@ repositories {
 dependencies {
     implementation 'org.jzy3d:jzy3d-core:2.2.1'
     implementation 'org.jzy3d:jzy3d-native-jogl-awt:2.2.1'
+}
+
+run {
+    jvmArgs = [
+            '--add-exports=java.base/java.lang=ALL-UNNAMED',
+            '--add-exports=java.desktop/sun.awt=ALL-UNNAMED',
+            '--add-exports=java.desktop/sun.java2d=ALL-UNNAMED',
+            '--enable-native-access=ALL-UNNAMED'
+    ]
 }
 
 jar {
